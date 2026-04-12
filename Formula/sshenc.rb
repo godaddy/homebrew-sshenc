@@ -22,7 +22,6 @@ class Sshenc < Formula
     bin.install "sshenc-agent"
     bin.install "gitenc"
     lib.install "libsshenc_pkcs11.dylib"
-    lib.install "libsshenc_pkcs11.so"    end
 
   test do
     assert_match "sshenc", shell_output("\#{bin}/sshenc --help 2>&1", 2)
