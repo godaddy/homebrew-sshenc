@@ -1,17 +1,17 @@
 class Sshenc < Formula
   desc "macOS Secure Enclave-backed SSH key management"
   homepage "https://github.com/jgowdy/sshenc"
-  version "0.3.0"
+  version "0.3.1"
   license "MIT"
 
   on_arm do
-    url "https://github.com/jgowdy/sshenc/releases/download/v0.3.0/sshenc-aarch64-apple-darwin.tar.gz"
-    sha256 "95cd294487c2c64984bafd512c250b6ef18150fb1a2f02c93fe3eac975ad921c"
+    url "https://github.com/jgowdy/sshenc/releases/download/v0.3.1/sshenc-aarch64-apple-darwin.tar.gz"
+    sha256 "219d67de181eaa9df97a02b7690c0c337ead805d30e6ceb5a1bcf4646bd6e637"
   end
 
   on_intel do
-    url "https://github.com/jgowdy/sshenc/releases/download/v0.3.0/sshenc-x86_64-apple-darwin.tar.gz"
-    sha256 "5f6b9514ab0ad8d3b81df03c48543e3434796cbe08895e4c74c3c5ec4a1c1dd9"
+    url "https://github.com/jgowdy/sshenc/releases/download/v0.3.1/sshenc-x86_64-apple-darwin.tar.gz"
+    sha256 "66b490ffd5ebc82c08cab9c8c8f8aff1fb4cfb447504e1b89df59ce6050eb18a"
   end
 
   depends_on :macos
