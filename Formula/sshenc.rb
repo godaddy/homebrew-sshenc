@@ -1,17 +1,17 @@
 class Sshenc < Formula
-  desc "macOS Secure Enclave-backed SSH key management"
+  desc "Hardware-backed SSH key management"
   homepage "https://github.com/jgowdy/sshenc"
-  version "0.4.0"
+  version "0.5.0"
   license "MIT"
 
   on_arm do
-    url "https://github.com/jgowdy/sshenc/releases/download/v0.4.0/sshenc-aarch64-apple-darwin.tar.gz"
-    sha256 "dd82fca2dcc1b5e6d2ae20b6517aeba823d4f07b7af9f1d385df71f222b452b7"
+    url "https://github.com/jgowdy/sshenc/releases/download/v0.5.0/sshenc-aarch64-apple-darwin.tar.gz"
+    sha256 "b8aae7961a37f649137bc4f733b1c5417da458fc65414ffbe1f3af4eeab294f9"
   end
 
   on_intel do
-    url "https://github.com/jgowdy/sshenc/releases/download/v0.4.0/sshenc-x86_64-apple-darwin.tar.gz"
-    sha256 "6ab81f017e6aad858a97e08b5d11b04ba8c8431a74ae71b835f9a4522617947e"
+    url "https://github.com/jgowdy/sshenc/releases/download/v0.5.0/sshenc-x86_64-apple-darwin.tar.gz"
+    sha256 "3dd0fbc956059e314ca659693a0ad6c1d12cd87026a886c0db14caccfc744041"
   end
 
   depends_on :macos
@@ -22,27 +22,9 @@ class Sshenc < Formula
     bin.install "sshenc-agent"
     bin.install "gitenc"
     lib.install "libsshenc_pkcs11.dylib"
-  end
-
-  def caveats
-    <<~EOS
-      To configure SSH to use sshenc for all connections:
-
-        sshenc install
-
-      The agent starts automatically when SSH needs it.
-
-      To generate a new Secure Enclave key:
-
-        sshenc keygen --label my-key
-
-      To remove the SSH configuration:
-
-        sshenc uninstall
-    EOS
-  end
+    lib.install "libsshenc_pkcs11.so"    end
 
   test do
-    assert_match "sshenc", shell_output("#{bin}/sshenc --version")
+    assert_match "sshenc", shell_output("\#{bin}/sshenc --help 2>&1", 2)
   end
 end
