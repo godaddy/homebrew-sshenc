@@ -6,12 +6,12 @@ class Sshenc < Formula
 
   on_arm do
     url "https://github.com/godaddy/sshenc/releases/download/v0.6.4/sshenc-aarch64-apple-darwin.tar.gz"
-    sha256 "6c7cd976d4d1018df80fdc944a93488a2d83f894741f08be1370eae150ea9390"
+    sha256 "88fb9fcd6c50df843f957189644d30c1142f5850b1d3058033374aa14c34fc68"
   end
 
   on_intel do
     url "https://github.com/godaddy/sshenc/releases/download/v0.6.4/sshenc-x86_64-apple-darwin.tar.gz"
-    sha256 "0ba5ae8d37a98752fd26d28156c18f551766846a54b1a221453ab41e5aeeeb7f"
+    sha256 "50caf6be3943c7fdf30c10f5ff1b2e7cef9df496fe576e5ae68ab9ee8f6f1235"
   end
 
   depends_on :macos
