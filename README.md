@@ -1,11 +1,11 @@
 # homebrew-sshenc
 
-Homebrew tap for [sshenc](https://github.com/jgowdy/sshenc) -- hardware-backed SSH key management using macOS Secure Enclave.
+Homebrew tap for [sshenc](https://github.com/godaddy/sshenc) -- hardware-backed SSH key management using macOS Secure Enclave.
 
 ## Install
 
 ```bash
-brew tap jgowdy/sshenc
+brew tap godaddy/sshenc
 brew install sshenc
 ```
 
@@ -19,5 +19,5 @@ brew upgrade sshenc
 
 ```bash
 brew uninstall sshenc
-brew untap jgowdy/sshenc
+brew untap godaddy/sshenc
 ```
