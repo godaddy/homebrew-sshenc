@@ -1,17 +1,17 @@
 class Sshenc < Formula
   desc "Hardware-backed SSH key management"
   homepage "https://github.com/godaddy/sshenc"
-  version "0.6.15"
+  version "0.6.16"
   license "MIT"
 
   on_arm do
-    url "https://github.com/godaddy/sshenc/releases/download/v0.6.15/sshenc-aarch64-apple-darwin.tar.gz"
-    sha256 "d02ec20d334bb8d240939fdfbc686e595333d06bcecbc180631b22740d980aa1"
+    url "https://github.com/godaddy/sshenc/releases/download/v0.6.16/sshenc-aarch64-apple-darwin.tar.gz"
+    sha256 "068552c9ab9f5520eef4d1e6a2c5332170f2f21389fcfde7eb0c93a32c95caf2"
   end
 
   on_intel do
-    url "https://github.com/godaddy/sshenc/releases/download/v0.6.15/sshenc-x86_64-apple-darwin.tar.gz"
-    sha256 "7a08bb275a632a312b32e064d7f78789dbc055c34f71206b2d7a6dd1fb0feaa1"
+    url "https://github.com/godaddy/sshenc/releases/download/v0.6.16/sshenc-x86_64-apple-darwin.tar.gz"
+    sha256 "41a30d058ccc2360423f8a9687d11220daaa0d58ec63a5bcdd61e47cd8411e7d"
   end
 
   depends_on :macos
