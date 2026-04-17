@@ -1,17 +1,17 @@
 class Sshenc < Formula
   desc "Hardware-backed SSH key management"
   homepage "https://github.com/godaddy/sshenc"
-  version "0.6.17"
+  version "0.6.18"
   license "MIT"
 
   on_arm do
-    url "https://github.com/godaddy/sshenc/releases/download/v0.6.17/sshenc-aarch64-apple-darwin.tar.gz"
-    sha256 "4960468fde8e6c85a6273cedd03224f53e237e19d6333c12fc59b416de723218"
+    url "https://github.com/godaddy/sshenc/releases/download/v0.6.18/sshenc-aarch64-apple-darwin.tar.gz"
+    sha256 "45d5a62812ea88de09ac204d615bdf805e152647d137997c5a4c06812d4f6029"
   end
 
   on_intel do
-    url "https://github.com/godaddy/sshenc/releases/download/v0.6.17/sshenc-x86_64-apple-darwin.tar.gz"
-    sha256 "8c2035442d874d1cdd8a247b87d0228f8e78028c84ee249de6163e5c471fbe04"
+    url "https://github.com/godaddy/sshenc/releases/download/v0.6.18/sshenc-x86_64-apple-darwin.tar.gz"
+    sha256 "99af82ada2c2d754016b9dc8c7faa28c5d9cb8519cac745a787bc78cccfc2de6"
   end
 
   depends_on :macos
@@ -21,6 +21,7 @@ class Sshenc < Formula
     bin.install "sshenc-keygen"
     bin.install "sshenc-agent"
     bin.install "gitenc"
+    bin.install "sshenc-tpm-bridge"
     lib.install "libsshenc_pkcs11.dylib"    end
 
   test do
