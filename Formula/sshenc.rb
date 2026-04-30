@@ -1,28 +1,27 @@
 class Sshenc < Formula
   desc "Hardware-backed SSH key management"
   homepage "https://github.com/godaddy/sshenc"
-  version "0.6.25"
+  version "0.6.28"
   license "MIT"
 
   on_arm do
-    url "https://github.com/godaddy/sshenc/releases/download/v0.6.25/sshenc-aarch64-apple-darwin.tar.gz"
-    sha256 "0d3b010f42964b1673ef7c68a69445289dea30f58e7dbe36f8f074c7bc33a5e4"
+    url "https://github.com/godaddy/sshenc/releases/download/v0.6.28/sshenc-aarch64-apple-darwin.tar.gz"
+    sha256 "4faf06fa7be1fe25fcfb814373507eac06531d16dba84960dab4b4c846dbf357"
   end
 
   on_intel do
-    url "https://github.com/godaddy/sshenc/releases/download/v0.6.25/sshenc-x86_64-apple-darwin.tar.gz"
-    sha256 "cdb45a8cd0e1dce5784a7b3546fd2b8623f0e49920e1df4847b7c8bb61138c25"
+    url "https://github.com/godaddy/sshenc/releases/download/v0.6.28/sshenc-x86_64-apple-darwin.tar.gz"
+    sha256 "630653a70fe382950d09e7aa74578721d76422bff855a697e2764f0bf5a272b0"
   end
 
   depends_on :macos
 
   def install
-    bin.install "sshenc"
-    bin.install "sshenc-keygen"
-    bin.install "sshenc-agent"
-    bin.install "gitenc"
-    bin.install "sshenc-tpm-bridge"
-    lib.install "libsshenc_pkcs11.dylib"    end
+    prefix.install "sshenc.app"
+    bin.install_symlink prefix/"sshenc.app/Contents/MacOS/sshenc" => "sshenc"
+    bin.install_symlink prefix/"sshenc.app/Contents/MacOS/sshenc-keygen" => "sshenc-keygen"
+    bin.install_symlink prefix/"sshenc.app/Contents/MacOS/sshenc-agent" => "sshenc-agent"
+    bin.install_symlink prefix/"sshenc.app/Contents/MacOS/gitenc" => "gitenc"    end
 
   test do
     assert_match "sshenc", shell_output("\#{bin}/sshenc --help 2>&1", 2)
