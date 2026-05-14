@@ -1,29 +1,29 @@
 class Sshenc < Formula
   desc "Hardware-backed SSH key management"
   homepage "https://github.com/godaddy/sshenc"
-  version "0.6.83"
+  version "0.6.84"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://github.com/godaddy/sshenc/releases/download/v0.6.83/sshenc-aarch64-apple-darwin.tar.gz"
-      sha256 "4ba369053cd28ff895b31a80319d834ac78392922684e1647e349f6b6db96e4d"
+      url "https://github.com/godaddy/sshenc/releases/download/v0.6.84/sshenc-aarch64-apple-darwin.tar.gz"
+      sha256 "9c47a60a274e7fc354d3330469b9618e64a5841696f5e40fe3092e6f3c76c5cf"
     end
 
     on_intel do
-      url "https://github.com/godaddy/sshenc/releases/download/v0.6.83/sshenc-x86_64-apple-darwin.tar.gz"
-      sha256 "94ec8adf3575dece086038ab259c061ea0058bf82e829e41e23eb62b55478d8e"
+      url "https://github.com/godaddy/sshenc/releases/download/v0.6.84/sshenc-x86_64-apple-darwin.tar.gz"
+      sha256 "f34b4c6b38bd8b1c9caa0b3dca65284e1568e35bf952e65d0c35348abb5d551c"
     end
   end
   on_linux do
     on_arm do
-      url "https://github.com/godaddy/sshenc/releases/download/v0.6.83/sshenc-aarch64-unknown-linux-gnu.tar.gz"
-      sha256 "445fd621e93f9152a2f9b5a58332cb9134b47372d02cb34a1cdb6e86ba6d0a56"
+      url "https://github.com/godaddy/sshenc/releases/download/v0.6.84/sshenc-aarch64-unknown-linux-gnu.tar.gz"
+      sha256 "284d601cd60367f644dc308c919c31af631158bd9c973bf10f411afa002cfb92"
     end
 
     on_intel do
-      url "https://github.com/godaddy/sshenc/releases/download/v0.6.83/sshenc-x86_64-unknown-linux-gnu.tar.gz"
-      sha256 "42947983b5dfa8f7767371795cdc62964866e0505db86496e81e1af749860654"
+      url "https://github.com/godaddy/sshenc/releases/download/v0.6.84/sshenc-x86_64-unknown-linux-gnu.tar.gz"
+      sha256 "73b02728659f08bfb29e3aaf2023bb28778c9c620487a530078a38d08ead8b5a"
     end
   end
 
@@ -47,14 +47,17 @@ class Sshenc < Formula
 
   def post_install
     # Restart a running LaunchAgent-managed daemon so users pick up the
-    # new binary immediately after . With KeepAlive=true in
-    # the plist,  causes launchd to relaunch the process
-    # from the updated Homebrew symlink automatically. No-op if the
-    # LaunchAgent has not been installed yet (fresh install, or the user
-    # manages the daemon themselves).
+    # new binary immediately after .  kills
+    # and relaunches the service; with KeepAlive=true launchd always
+    # restarts it. Explicitly targets the gui/<uid> bootstrap domain so
+    # this works when brew runs in a background auto-updater context
+    # (which lacks the default user session domain that plain
+    #  targets). No-op if the LaunchAgent has not been
+    # installed yet.
     plist = "\#{Dir.home}/Library/LaunchAgents/com.godaddy.\#{name}.agent.plist"
     if File.exist?(plist)
-      system "launchctl", "stop", "com.godaddy.\#{name}.agent"
+      uid = 1001.strip
+      system "launchctl", "kickstart", "-k", "gui/\#{uid}/com.godaddy.\#{name}.agent"
     end
   end
 
