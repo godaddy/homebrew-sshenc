@@ -1,29 +1,29 @@
 class Sshenc < Formula
   desc "Hardware-backed SSH key management"
   homepage "https://github.com/godaddy/sshenc"
-  version "0.6.84"
+  version "0.6.85"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://github.com/godaddy/sshenc/releases/download/v0.6.84/sshenc-aarch64-apple-darwin.tar.gz"
-      sha256 "9c47a60a274e7fc354d3330469b9618e64a5841696f5e40fe3092e6f3c76c5cf"
+      url "https://github.com/godaddy/sshenc/releases/download/v0.6.85/sshenc-aarch64-apple-darwin.tar.gz"
+      sha256 "6291ea52cd68fad7c1b7be9cd2b0f90ae03a9f4caae424a0f1cc1d88ab0a40d0"
     end
 
     on_intel do
-      url "https://github.com/godaddy/sshenc/releases/download/v0.6.84/sshenc-x86_64-apple-darwin.tar.gz"
-      sha256 "f34b4c6b38bd8b1c9caa0b3dca65284e1568e35bf952e65d0c35348abb5d551c"
+      url "https://github.com/godaddy/sshenc/releases/download/v0.6.85/sshenc-x86_64-apple-darwin.tar.gz"
+      sha256 "9ca237dbb6f47505ece4f61846ccefcba8a4ab74d7671552f1404a23f28a179a"
     end
   end
   on_linux do
     on_arm do
-      url "https://github.com/godaddy/sshenc/releases/download/v0.6.84/sshenc-aarch64-unknown-linux-gnu.tar.gz"
-      sha256 "284d601cd60367f644dc308c919c31af631158bd9c973bf10f411afa002cfb92"
+      url "https://github.com/godaddy/sshenc/releases/download/v0.6.85/sshenc-aarch64-unknown-linux-gnu.tar.gz"
+      sha256 "ef230d4c863d0dc3f85686e65c901c7d088cf2aa4d043f96396af4832f56146f"
     end
 
     on_intel do
-      url "https://github.com/godaddy/sshenc/releases/download/v0.6.84/sshenc-x86_64-unknown-linux-gnu.tar.gz"
-      sha256 "73b02728659f08bfb29e3aaf2023bb28778c9c620487a530078a38d08ead8b5a"
+      url "https://github.com/godaddy/sshenc/releases/download/v0.6.85/sshenc-x86_64-unknown-linux-gnu.tar.gz"
+      sha256 "36ee4a1e7c20df1b8a1aa3edd1a645a78cff26740a81c06fbb33f64631c0eda3"
     end
   end
 
@@ -56,7 +56,7 @@ class Sshenc < Formula
     # installed yet.
     plist = "\#{Dir.home}/Library/LaunchAgents/com.godaddy.\#{name}.agent.plist"
     if File.exist?(plist)
-      uid = 1001.strip
+      uid = Process.uid.to_s
       system "launchctl", "kickstart", "-k", "gui/\#{uid}/com.godaddy.\#{name}.agent"
     end
   end
