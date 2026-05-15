@@ -1,29 +1,29 @@
 class Sshenc < Formula
   desc "Hardware-backed SSH key management"
   homepage "https://github.com/godaddy/sshenc"
-  version "0.6.87"
+  version "0.6.89"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://github.com/godaddy/sshenc/releases/download/v0.6.87/sshenc-aarch64-apple-darwin.tar.gz"
-      sha256 "03902cee261439c786a8bf16cbd15a79b81076ece437d1f999727769eebb10a2"
+      url "https://github.com/godaddy/sshenc/releases/download/v0.6.89/sshenc-aarch64-apple-darwin.tar.gz"
+      sha256 "8716c727bb57a93c21eaa7b09047a7eeab68f205bc704ddebd73508fbc07228d"
     end
 
     on_intel do
-      url "https://github.com/godaddy/sshenc/releases/download/v0.6.87/sshenc-x86_64-apple-darwin.tar.gz"
-      sha256 "8966a6acd7c392dfb38402bf3ca75812862ef2727a13f31d052fefaaba05f5c9"
+      url "https://github.com/godaddy/sshenc/releases/download/v0.6.89/sshenc-x86_64-apple-darwin.tar.gz"
+      sha256 "88b00e836fe83f15f8bd01b20338741c866a97e51cf42020bfde45921c2535ef"
     end
   end
   on_linux do
     on_arm do
-      url "https://github.com/godaddy/sshenc/releases/download/v0.6.87/sshenc-aarch64-unknown-linux-gnu.tar.gz"
-      sha256 "8936562ee5bb64ef033a3ddaa3992c4635fe887a985a6db5ee8bea6bed48502d"
+      url "https://github.com/godaddy/sshenc/releases/download/v0.6.89/sshenc-aarch64-unknown-linux-gnu.tar.gz"
+      sha256 "a3b3100801b9aff85bcdc6591f7e43558c01d9869638c77024cb3d32607db769"
     end
 
     on_intel do
-      url "https://github.com/godaddy/sshenc/releases/download/v0.6.87/sshenc-x86_64-unknown-linux-gnu.tar.gz"
-      sha256 "b26d90fe07ce884ec00ff69c46b605c9c0cde4052ce7500ba86d1d45f5fb4c74"
+      url "https://github.com/godaddy/sshenc/releases/download/v0.6.89/sshenc-x86_64-unknown-linux-gnu.tar.gz"
+      sha256 "e7773cdb95f7927c05b63f616c3c7a4441387e468ff3c549d127e345bf7fcad9"
     end
   end
 
@@ -59,6 +59,31 @@ class Sshenc < Formula
       uid = Process.uid.to_s
       system "launchctl", "kickstart", "-k", "gui/#{uid}/com.godaddy.#{name}.agent"
     end
+  end
+
+  def uninstall
+    # Run the app's own uninstall command before Homebrew removes the
+    # binary. This cleans up the SSH config block, shell rc snippet,
+    # and LaunchAgent plist so a broken agent job isn't left pointing
+    # at a deleted binary after . Idempotent: safe to
+    # call even if the app was never configured.
+    quiet_system "#{bin}/#{name}", "uninstall"
+  end
+
+  def caveats
+    <<~EOS
+      After installing, run:
+        #{name} install
+
+      This configures SSH to use #{name} and starts the agent.
+
+      Before uninstalling with , run:
+        #{name} uninstall
+
+      Or simply run  — the formula's uninstall
+      hook calls  automatically while the binary is
+      still present.
+    EOS
   end
 
   test do
